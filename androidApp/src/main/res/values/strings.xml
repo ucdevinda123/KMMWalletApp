@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KMMWalletApp</string>
+    <string name="landing_caption_one">Spend like a local wherever you go!</string>
+    <string name="login_caption_one">Welcome back!</string>
+    <string name="signup_caption_one">Create Account</string>
+    <string name="signup_caption_two">Let\'s enter your details to Sign up</string>
+    <string name="login_caption_two">Let\'s enter your details to Sign in</string>
+    <string name="landing_caption_two">Instantly change your ringgit into 11 different currencies (psst, more to come!) with zero hidden fees and real-time exchange rates.</string>
+    <string name="btn_login">Sign In</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="enter_your_first_name">First Name</string>
+    <string name="enter_your_last_name">Last Name</string>
+    <string name="enter_your_email">Mobile no</string>
+    <string name="enter_your_password">Password</string>
+    <string name="enter_your_re_password">Re password</string>
+    <string name="loading">Loading...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_values_not_allowed">Empty values are not allowed!</string>
+    <string name="btn_update">Update</string>
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="are_you_sure_you_wanna_logout">Are you sure you want to Logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="tag_profile_fragment">EDIT_PROFILE</string>
+    <string name="tag_landing_page">LANDING_PAGE</string>
+    <string name="transfer_label">Transfer</string>
+    <string name="lock_card">Lock Card</string>
+</resources>
