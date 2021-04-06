@@ -1,11 +1,11 @@
 # KMMWalletApp
 Kotlin Multi platform Wallet application - Android &amp; iOS
 
-System Requirements : (MAC)
+# System Requirements : (MAC)
 Android Studio 4.1 higher (Used 4.1.3)
 Xcode : 12.01(12A7300)
 
-Libraries Used :
+# Libraries Used :
 REF : 
 https://kotlinlang.org/docs/mobile/add-dependencies.html 
 https://github.com/AAkira/Kotlin-Multiplatform-Libraries
