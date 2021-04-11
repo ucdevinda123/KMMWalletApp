@@ -12,14 +12,14 @@ struct LoginView: View {
     @State private var mobileNo = ""
     @State private var password = ""
     @State private var actionHome: Int? = 0
-    @State private var loginState = LoginScreenState(token: "", status: Status.loading, message: "")
+    @State private var loginState = ScreenState(status: Status.loading, message: "")
     @State private var signInBtnLabel = "SignIn"
     @State var showsAlert = false
     @State var validationMessage = ""
     var  loginViewModel = LoginViewModel()
     
     init() {
-        self.loginState =  LoginScreenState(token: "", status: Status.loading, message: "")
+        self.loginState =  ScreenState(status: Status.loading, message: "")
         self.loginViewModel =  LoginViewModel()
     }
     
@@ -90,7 +90,7 @@ struct LoginView: View {
                             if validated {
                                 self.showsAlert = false
                                 self.signInBtnLabel = "Loading.."
-                                loginViewModel.authenticateUser(user:self.mobileNo, pass: self.password, completion: { (state : LoginScreenState) in
+                                loginViewModel.authenticateUser(user:self.mobileNo, pass: self.password, completion: { (state : ScreenState) in
                                     self.signInBtnLabel = "Sign In"
                                     if(state.status == Status.success){
                                         self.showsAlert = false

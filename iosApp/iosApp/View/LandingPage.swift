@@ -13,14 +13,11 @@ struct LandingPage: View {
     var body: some View {
         NavigationView {
             ZStack{
-                
                 Image("bg_landing").resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.width)
                     .overlay(Color.black.opacity(0.35)) .edgesIgnoringSafeArea([.top, .bottom])
-                
                 VStack(){
-                    
                     VStack(alignment: .leading, spacing:30){
                         
                         Text("Spend like a local wherever you go!")
@@ -31,8 +28,6 @@ struct LandingPage: View {
                         Text("Instantly change your ringgit into 11 different currencies (psst, more to come!) with zero hidden fees and real-time exchange rates.")
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
-                        
-                        
                     }
                     
                     Spacer()
@@ -58,7 +53,7 @@ struct LandingPage: View {
                             self.action = 1
                         }
                         
-         
+                        
                         HStack {
                             NavigationLink(destination: SignUpView(), tag: 1, selection: $actionSignUp) {
                                 
@@ -76,14 +71,12 @@ struct LandingPage: View {
                         .foregroundColor(.white)
                         
                         .background(RoundedRectangle(cornerRadius: 45).fill(Color("bg_color")))
-                        
                     }
-                   
+                    
                 }
             }
         }.accentColor(.white).navigationBarHidden(true)
     }
-    
 }
 struct LandingPage_Previews: PreviewProvider {
     static var previews: some View {

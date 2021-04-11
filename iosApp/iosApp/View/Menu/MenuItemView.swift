@@ -8,33 +8,32 @@
 import SwiftUI
 
 struct MenuItemView: View {
-
-   @Binding var show: Bool
-   @State var showUpdate = false
+    
+    @Binding var show: Bool
+    @State var showUpdate = false
     @State var showLogout: Int? = 0
-  var  homeViewModel = HomeViewModel()
-
-   var body: some View {
-      return ZStack(alignment: .topTrailing) {
-         HStack {
-            NavigationLink(destination: LandingPage(), tag: 1, selection: $showLogout) {
+    var  homeViewModel = HomeViewModel()
+    
+    var body: some View {
+        return ZStack(alignment: .topTrailing) {
+            HStack {
+                NavigationLink(destination: LandingPage(), tag: 1, selection: $showLogout) {
+                }
+                Button(action: { self.showUpdate.toggle() }) {
+                    CircleButtonView(icon: "person.crop.circle")
+                        .sheet(isPresented: self.$showUpdate) {
+                            EditProfileView()
+                        }
+                }
+                Button(action: {
+                    //  self.homeViewModel
+                    self.showLogout = 1
+                }) {
+                    CircleButtonView(icon: "safari")
+                }
+                
             }
-            Button(action: { self.showUpdate.toggle() }) {
-                CircleButtonView(icon: "person.crop.circle")
-                  .sheet(isPresented: self.$showUpdate) {
-                    EditProfileView()
-                  }
-            }
-            Button(action: {
-                self.homeViewModel.clearToken()
-                self.showLogout = 1
-            }) {
-                CircleButtonView(icon: "safari")
-            }
-           
-         }
-         Spacer()
-      }
-   }
+            Spacer()
+        }
+    }
 }
-

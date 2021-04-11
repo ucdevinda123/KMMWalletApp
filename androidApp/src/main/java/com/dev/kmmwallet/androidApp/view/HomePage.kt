@@ -13,16 +13,15 @@ import com.dev.kmmwallet.androidApp.MainActivity
 import com.dev.kmmwallet.androidApp.R
 import com.dev.kmmwallet.androidApp.viewmodel.HomeViewModel
 import com.dev.kmmwallet.shared.viewmodel.event.home.HomeScreenState
-import com.dev.kmmwallet.shared.viewmodel.status.Status
 
 class HomePage : Fragment(), View.OnClickListener {
 
-    lateinit var viewModel: HomeViewModel
-    lateinit var profileButton: ImageView
-    lateinit var logoutButton : ImageView
-    lateinit var userName: TextView
-    lateinit var greetingText: TextView
-    lateinit var cardHolderName : TextView
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var profileButton: ImageView
+    private lateinit var logoutButton: ImageView
+    private lateinit var userName: TextView
+    private lateinit var greetingText: TextView
+    private lateinit var cardHolderName: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +37,7 @@ class HomePage : Fragment(), View.OnClickListener {
         return view
     }
 
-
-    fun initView(view: View) {
+    private fun initView(view: View) {
         viewModel = HomeViewModel()
         profileButton = view.findViewById(R.id.editProfileButton)
         logoutButton = view.findViewById(R.id.logout)
@@ -51,27 +49,12 @@ class HomePage : Fragment(), View.OnClickListener {
         setUiValues()
     }
 
-
-    fun handleState(loginScreenState: HomeScreenState) {
-        when (loginScreenState.status) {
-            Status.SUCCESS -> {
-                print("SSUSUSUSUS") // Navigation
-            }
-            Status.LOADING -> {
-
-            }
-            Status.ERROR -> {
-                showMessage(loginScreenState.message)
-            }
-
-        }
-    }
-
-
-    private fun setUiValues(){
-       greetingText.text =  viewModel.greetUser()
-        userName.text = viewModel.getFirstName()
-        cardHolderName.text = viewModel.getFirstName() + " " + viewModel.getLastName()
+    private fun setUiValues() {
+        viewModel.initHomePage(fun(homeState: HomeScreenState) {
+            userName.text = homeState.name
+            cardHolderName.text = homeState.fullName
+            greetingText.text = homeState.greeting
+        })
     }
 
     override fun onClick(v: View?) {
@@ -86,24 +69,21 @@ class HomePage : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun showMessage(message: String) {
-        (activity as MainActivity).showToast(message)
-    }
-
-    private fun performLogout(){
+    private fun performLogout() {
         val builder = AlertDialog.Builder(this.requireContext())
         builder.setMessage(getString(R.string.are_you_sure_you_wanna_logout))
             .setCancelable(false)
             .setPositiveButton(
-                getString(R.string.yes),DialogInterface.OnClickListener { dialog, id ->
-                    viewModel.clearToken()
-                    (activity as MainActivity).addLandingPageFragment(LandingPage(),"Landing")
-                 }
+                getString(R.string.yes), DialogInterface.OnClickListener { _, _ ->
+                    viewModel.logoutUser(fun(_: HomeScreenState) {
+                        (activity as MainActivity).addLandingPageFragment(LandingPage())
+                    })
+                }
             )
-            .setNegativeButton(getString(R.string.no), DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+            .setNegativeButton(
+                getString(R.string.no),
+                DialogInterface.OnClickListener { dialog, _ -> dialog.cancel() })
         val alert = builder.create()
         alert.show()
     }
-
 }
-

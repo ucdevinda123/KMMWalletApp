@@ -12,17 +12,17 @@ import androidx.fragment.app.Fragment
 import com.dev.kmmwallet.androidApp.MainActivity
 import com.dev.kmmwallet.androidApp.R
 import com.dev.kmmwallet.androidApp.viewmodel.LoginViewModel
-import com.dev.kmmwallet.shared.viewmodel.event.LoginScreenState
+import com.dev.kmmwallet.shared.viewmodel.status.ScreenState
 import com.dev.kmmwallet.shared.viewmodel.status.Status
 
 
-class LoginPage : Fragment(), View.OnClickListener{
+class LoginPage : Fragment(), View.OnClickListener {
 
-    lateinit var viewModel:LoginViewModel
+    lateinit var viewModel: LoginViewModel
     lateinit var mobileNumberEditText: EditText
     lateinit var passwordEditText: EditText
     lateinit var loginButton: Button
-    lateinit var toolBar : Toolbar
+    lateinit var toolBar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +33,12 @@ class LoginPage : Fragment(), View.OnClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       var  view = inflater.inflate(R.layout.login_page, container, false)
+        var view = inflater.inflate(R.layout.login_page, container, false)
         initialize(view)
         return view
     }
 
-
-    fun initialize(view: View){
+    private fun initialize(view: View) {
         loginButton = view.findViewById(R.id.btn_signIn)
         mobileNumberEditText = view.findViewById(R.id.login_edit_email)
         passwordEditText = view.findViewById(R.id.login_edit_pass)
@@ -51,24 +50,23 @@ class LoginPage : Fragment(), View.OnClickListener{
         toolBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24)
     }
 
-
-    private fun authenticateUserEv(){
+    private fun authenticateUserEv() {
         val mobileNumber = mobileNumberEditText.text.toString()
         val passWord = passwordEditText.text.toString()
-        if(validate(mobileNumber) && validate(passWord)){
+        if (validate(mobileNumber) && validate(passWord)) {
             loginButton.text = getString(R.string.loading)
-            viewModel.authenticateUser(mobileNumber, passWord, fun(state: LoginScreenState) {
-                loginButton.text = getString(R.string.btn_login)
+            viewModel.authenticateUser(mobileNumber, passWord, fun(state: ScreenState) {
                 handleState(state)
             })
-        }else {
+        } else {
             showToast(getString(R.string.empty_values_not_allowed))
         }
 
     }
 
-    fun handleState(loginScreenState: LoginScreenState){
-        when(loginScreenState.status){
+    private fun handleState(loginScreenState: ScreenState) {
+        loginButton.text = getString(R.string.btn_login)
+        when (loginScreenState.status) {
             Status.SUCCESS -> {
                 navigateToHome()
             }
@@ -79,11 +77,12 @@ class LoginPage : Fragment(), View.OnClickListener{
                 showToast(loginScreenState.message)
             }
 
+            else -> showToast(loginScreenState.message)
         }
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.btn_signIn -> {
                 authenticateUserEv()
             }
@@ -94,20 +93,19 @@ class LoginPage : Fragment(), View.OnClickListener{
         }
     }
 
-    fun goBack() {
+    private fun goBack() {
         fragmentManager?.popBackStackImmediate()
     }
 
-    fun showToast(message: String) {
+    private fun showToast(message: String) {
         (activity as MainActivity).showToast(message)
     }
 
-    private fun validate(text : String)  :Boolean{
+    private fun validate(text: String): Boolean {
         return !(TextUtils.isEmpty(text))
     }
 
-
     private fun navigateToHome() {
-        (activity as MainActivity).replaceFragment(HomePage(),"")
+        (activity as MainActivity).replaceFragment(HomePage(), "")
     }
 }

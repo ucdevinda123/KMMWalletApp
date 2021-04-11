@@ -22,11 +22,6 @@ struct EditProfileView: View {
         !self.firstName.isEmpty && !self.lastName.isEmpty
     }
     
-    init() {
-        self.firstName = userProfileViewModel.getUserFirstName()
-        self.lastName = userProfileViewModel.getUserLastName()
-    }
-    
     var body: some View {
         VStack {
             HStack() {
@@ -40,7 +35,7 @@ struct EditProfileView: View {
             Image("profile_edit_bg")
             
             VStack(alignment: .leading, spacing: 30) {
-          
+                
                 TextField("First Name",
                           text: self.$firstName)
                     .foregroundColor(.black)
@@ -98,7 +93,12 @@ struct EditProfileView: View {
                 .background(RoundedRectangle(cornerRadius: 45).fill(Color("bg_color")))
             }.padding([.leading, .trailing], 27.5)
             
-        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).background(Color("background"))
+        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).background(Color("background")).onAppear(perform: {
+            userProfileViewModel.initProfile(completion: { (state : UserProfileScreenState) in
+                self.firstName = state.name
+                self.lastName = state.lastName
+            })
+        })
     }
 }
 

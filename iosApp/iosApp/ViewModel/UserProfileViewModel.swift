@@ -15,27 +15,14 @@ class UserProfileViewModel {
     
     public func editUserProfile(firstName : String,lastName:String ,completion: @escaping (UserProfileScreenState)->()) {
         let userProfile = UserProfile(firstName: firstName,lastName: lastName)
-        self.sharedViewModel.events.updateUserProfile(id:getUserId(),token:getToken(),user: userProfile) { (state : UserProfileScreenState) in
+        self.sharedViewModel.stateProvider.getUserProfileState(user: userProfile) { (state : UserProfileScreenState) in
             completion(state)
         }
     }
     
-    func getUserId() -> String{
-        return sharedViewModel.events.getId()
-    }
-    
-    func getToken() -> String{
-        return sharedViewModel.events.getToken()
-    }
-    
-    func getUserFirstName() -> String{
-        return sharedViewModel.events.getFirstName()
-    }
-    
-    func getUserLastName() -> String{
-        return sharedViewModel.events.getLastName()
+    func initProfile(completion: @escaping (UserProfileScreenState)->()){
+        self.sharedViewModel.stateProvider.doInitProfileScreen { (state: UserProfileScreenState) in
+            completion(state)
+        }
     }
 }
-
-
-

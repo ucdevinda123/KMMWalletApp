@@ -1,16 +1,11 @@
 package com.dev.kmmwallet.shared.viewmodel.event.home
 
 import com.dev.kmmwallet.shared.viewmodel.Events
-import com.dev.kmmwallet.shared.viewmodel.event.LocalSettingsKeys
 
-fun Events.getFirstName() : String {
-   return localSettings.getString(LocalSettingsKeys.FIRST_NAME.name)
+suspend fun Events.initHome() {
+    stateReducers.initHome()
 }
 
-fun Events.getLastName() : String {
-    return localSettings.getString(LocalSettingsKeys.LAST_NAME.name)
-}
-
-fun Events.clearToken() {
-    return localSettings.clear()
+suspend fun Events.logout() {
+    stateReducers.logoutUser()
 }

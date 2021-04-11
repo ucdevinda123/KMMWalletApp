@@ -15,7 +15,7 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var rePassword = ""
     @State private var actionLogin: Int? = 0
-    @State private var signUpState = SignUpScreenState(status: Status.loading, message: "")
+    @State private var signUpState = ScreenState(status: Status.loading, message: "")
     @State private var signInBtnLabel = "Sign Up"
     @State var showsAlert = false
     @State var validationMessage = ""
@@ -126,7 +126,7 @@ struct SignUpView: View {
                             if validated {
                                 if isPasswordFieldsValidated {
                                     self.signInBtnLabel = "Loading.."
-                                    signUpViewModel.signUpUser(firstName : self.firstName, lastName: self.lastName,mobile:self.mobileNo,pass: self.password, completion: { (state : SignUpScreenState) in
+                                    signUpViewModel.signUpUser(firstName : self.firstName, lastName: self.lastName,mobile:self.mobileNo,pass: self.password, completion: { (state : ScreenState) in
                                         self.signInBtnLabel = "Sign Up"
                                         if(state.status == Status.success){
                                             self.showsAlert = false

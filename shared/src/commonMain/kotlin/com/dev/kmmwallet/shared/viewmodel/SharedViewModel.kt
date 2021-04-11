@@ -1,14 +1,14 @@
 package com.dev.kmmwallet.shared.viewmodel
 
-import com.russhwolf.settings.Settings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SharedViewModel {
-    val events by lazy { Events(stateReducers,localSettings) }
-    private val stateReducers by lazy { StateReducer() }
-    val localSettings by lazy { Settings() }
+    val stateProvider by lazy { StateProvider(stateManager, events) }
+    val events by lazy { Events(stateReducers) }
+    private val stateReducers by lazy { StateReducer(stateManager) }
+    private val stateManager by lazy { StateManager() }
 }
 
 fun launchCoroutine(function: suspend () -> Unit) {

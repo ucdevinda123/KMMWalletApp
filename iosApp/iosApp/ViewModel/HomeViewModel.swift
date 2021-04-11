@@ -11,7 +11,7 @@ import shared
 
 class HomeViewModel {
     private let sharedViewModel: SharedViewModel = SharedViewModel()
-    func greetUser() -> String{
+    private func greetUser() -> String{
         
         let date = NSDate()
         let calendar = NSCalendar.current
@@ -33,16 +33,10 @@ class HomeViewModel {
         return ""
     }
     
-    
-    func getUserFirstName() -> String{
-        return sharedViewModel.events.getFirstName()
-    }
-    
-    func getUserLastName() -> String {
-        return sharedViewModel.events.getLastName()
-    }
-    
-    func clearToken() {
-        sharedViewModel.events.clearToken()
+    func initHome(completion: @escaping (HomeScreenState)->()){
+        self.sharedViewModel.stateProvider.doInitHomeScreen { (state: HomeScreenState) in
+            state.greeting = self.greetUser()
+            completion(state)
+        }
     }
 }

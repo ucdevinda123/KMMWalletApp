@@ -14,7 +14,6 @@
 		2B0E2118261856E000782CFE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E2110261856E000782CFE /* HomeView.swift */; };
 		2B0E2119261856E000782CFE /* HomeVisaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E2111261856E000782CFE /* HomeVisaCard.swift */; };
 		2B0E211A261856E000782CFE /* TransactionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E2112261856E000782CFE /* TransactionItemView.swift */; };
-		2B0E211B261856E000782CFE /* HomeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E2113261856E000782CFE /* HomeCardView.swift */; };
 		2B0E21212618573B00782CFE /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E211F2618573B00782CFE /* CircleButtonView.swift */; };
 		2B0E21222618573B00782CFE /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E21202618573B00782CFE /* MenuItemView.swift */; };
 		2B0E2127261857DD00782CFE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E2126261857DD00782CFE /* LoginViewModel.swift */; };
@@ -73,7 +72,6 @@
 		2B0E2110261856E000782CFE /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2B0E2111261856E000782CFE /* HomeVisaCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVisaCard.swift; sourceTree = "<group>"; };
 		2B0E2112261856E000782CFE /* TransactionItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionItemView.swift; sourceTree = "<group>"; };
-		2B0E2113261856E000782CFE /* HomeCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCardView.swift; sourceTree = "<group>"; };
 		2B0E211F2618573B00782CFE /* CircleButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 		2B0E21202618573B00782CFE /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		2B0E2126261857DD00782CFE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				2BC4376D26193F58007FF730 /* Common */,
 				2B0E211E2618573B00782CFE /* Menu */,
 				2B0E210C261856E000782CFE /* EditProfileView.swift */,
-				2B0E2113261856E000782CFE /* HomeCardView.swift */,
 				2B0E2110261856E000782CFE /* HomeView.swift */,
 				2B0E2111261856E000782CFE /* HomeVisaCard.swift */,
 				2B0E210D261856E000782CFE /* LandingPage.swift */,
@@ -407,7 +404,6 @@
 				2B0E21212618573B00782CFE /* CircleButtonView.swift in Sources */,
 				2B0E211A261856E000782CFE /* TransactionItemView.swift in Sources */,
 				2B0E2118261856E000782CFE /* HomeView.swift in Sources */,
-				2B0E211B261856E000782CFE /* HomeCardView.swift in Sources */,
 				2B0E2114261856E000782CFE /* EditProfileView.swift in Sources */,
 				2BB8A720261A502100419C17 /* UserProfileViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,

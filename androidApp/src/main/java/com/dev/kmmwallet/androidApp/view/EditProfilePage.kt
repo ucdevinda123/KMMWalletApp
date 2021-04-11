@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.dev.kmmwallet.androidApp.MainActivity
 import com.dev.kmmwallet.androidApp.R
-import com.dev.kmmwallet.androidApp.viewmodel.HomeViewModel
+import com.dev.kmmwallet.androidApp.viewmodel.UserProfileViewModel
 import com.dev.kmmwallet.shared.viewmodel.event.userprofile.UserProfileScreenState
 import com.dev.kmmwallet.shared.viewmodel.status.Status
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,10 +18,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class EditProfilePage : BottomSheetDialogFragment(), View.OnClickListener {
 
-    lateinit var viewModel: HomeViewModel
-    lateinit var firstName: EditText
-    lateinit var lastName: EditText
-    lateinit var updateButton: Button
+    private lateinit var viewModel: UserProfileViewModel
+    private lateinit var firstName: EditText
+    private lateinit var lastName: EditText
+    private lateinit var updateButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,19 +38,20 @@ class EditProfilePage : BottomSheetDialogFragment(), View.OnClickListener {
     }
 
 
-    fun initView(view: View) {
-        viewModel = HomeViewModel()
+    private fun initView(view: View) {
+        viewModel = UserProfileViewModel()
         firstName = view.findViewById(R.id.profile_edit_first_name)
         lastName = view.findViewById(R.id.profile_edit_last_name)
         updateButton = view.findViewById(R.id.btn_edit_profile)
         updateButton.setOnClickListener(this)
-
         initProfileValues()
     }
 
     private fun initProfileValues() {
-        firstName.text = Editable.Factory.getInstance().newEditable(viewModel.getFirstName())
-        lastName.text = Editable.Factory.getInstance().newEditable(viewModel.getLastName())
+        viewModel.initProfile (fun(profileState: UserProfileScreenState){
+            firstName.text  = Editable.Factory.getInstance().newEditable(profileState.name)
+            lastName.text = Editable.Factory.getInstance().newEditable(profileState.lastName)
+        })
     }
 
 
@@ -66,6 +67,7 @@ class EditProfilePage : BottomSheetDialogFragment(), View.OnClickListener {
                 showMessage(userProfileScreenState.message)
             }
 
+            else -> showMessage(userProfileScreenState.message)
         }
     }
 

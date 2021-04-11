@@ -14,14 +14,12 @@ class LoginViewModel{
     
     private let sharedViewModel: SharedViewModel = SharedViewModel()
     
-    public func authenticateUser(user : String , pass : String, completion: @escaping (LoginScreenState)->()) {
+    public func authenticateUser(user : String , pass : String, completion: @escaping (ScreenState)->()) {
         let user = User(username: user, password: pass)
-        self.sharedViewModel.events.userLogin(user: user) { (state : LoginScreenState) in
+        self.sharedViewModel.stateProvider.getUserAuthState(user: user) { (state : ScreenState) in
             completion(state)
         }
     }
     
-    func getToken() -> String{
-        return sharedViewModel.events.getToken()
-    }
+  
 }
