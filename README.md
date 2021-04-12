@@ -21,6 +21,9 @@ https://github.com/AAkira/Kotlin-Multiplatform-Libraries
 		
 5.Local key value pair storage : multiplatform-settings - A Kotlin Multiplatform library for saving simple key-value data.
         https://github.com/russhwolf/multiplatform-settings
+	
+# Architecture Used : MVI
+![Archi](https://user-images.githubusercontent.com/4921099/114329703-a1ea5c80-9b72-11eb-8cc4-96965f88944f.PNG)
 
 
 
