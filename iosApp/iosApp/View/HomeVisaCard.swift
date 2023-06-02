@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct HomeVisaCard: View {
     
@@ -13,13 +14,8 @@ struct HomeVisaCard: View {
     var image = "Illustration1"
     var color = Color("background3")
     var shadowColor = Color("backgroundShadow3")
-    var fullName = ""
-    
-    init() {
-        let homeViewModel = HomeViewModel()
-        fullName =  homeViewModel.getUserFirstName() + " " +  homeViewModel.getUserLastName()
-        
-    }
+    @State var fullName = ""
+    var homeViewModel = HomeViewModel()
     
     var body: some View {
         return VStack(alignment: .leading) {
@@ -45,7 +41,7 @@ struct HomeVisaCard: View {
             Spacer()
             
             HStack{
-               Text(fullName).font(.subheadline)
+                Text(self.fullName).font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(10)
@@ -59,7 +55,11 @@ struct HomeVisaCard: View {
                     .padding(.leading, 30)
                     .padding(.horizontal, 30)
                 
-            }
+            }.onAppear(perform: {
+                self.homeViewModel.initHome(completion: { (state : HomeScreenState) in
+                    self.fullName = state.fullName
+                })
+            })
         }
         .background(
             Color("bg_color"))

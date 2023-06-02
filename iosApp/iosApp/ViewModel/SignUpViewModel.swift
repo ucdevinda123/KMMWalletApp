@@ -13,9 +13,9 @@ import shared
 class SignUpViewModel {
     private let sharedViewModel: SharedViewModel = SharedViewModel()
     
-    public func signUpUser(firstName : String,lastName : String,mobile : String , pass:String, completion: @escaping (SignUpScreenState)->()) {
+    public func signUpUser(firstName : String,lastName : String,mobile : String , pass:String, completion: @escaping (ScreenState)->()) {
         let userRegistration = UserRegistration(username:mobile,password: pass,firstName: firstName,lastName: lastName)
-        self.sharedViewModel.events.userSignUp(user: userRegistration) { (state : SignUpScreenState) in
+        self.sharedViewModel.stateProvider.getUserRegistrationState(user: userRegistration) { (state : ScreenState) in
             completion(state)
         }
     }

@@ -1,34 +1,24 @@
 package com.dev.kmmwallet.androidApp.viewmodel
 
-import com.dev.kmmwallet.shared.datasource.webservice.model.request.UserProfile
-import com.dev.kmmwallet.shared.viewmodel.event.userprofile.UserProfileScreenState
-import com.dev.kmmwallet.shared.viewmodel.event.userprofile.updateUserProfile
-import com.dev.kmmwallet.shared.viewmodel.launchCoroutine
+import com.dev.kmmwallet.shared.viewmodel.event.home.HomeScreenState
+import com.dev.kmmwallet.shared.viewmodel.event.home.initHomeScreen
+import com.dev.kmmwallet.shared.viewmodel.event.home.logoutUser
 import java.util.*
 
 class HomeViewModel : BaseViewModel() {
 
-    fun updateUserProfile(
-        firstName: String,
-        lastName: String,
-        updateUi: (profileState: UserProfileScreenState) -> Unit
-    ) {
-        launchCoroutine {
-            sharedViewModel.events.updateUserProfile(
-                getUserId(),
-                getToken(),
-                UserProfile(firstName, lastName),
-                fun(profileState) {
-                    updateUi(profileState)
-                })
+    fun initHomePage(updateHomeUi: (homeScreenState: HomeScreenState) -> Unit) {
+        sharedViewModel.stateProvider.initHomeScreen {
+            it.greeting = greetUser()
+            updateHomeUi(it)
         }
     }
 
-    fun greetUser():String{
+    private fun greetUser(): String {
         val c: Calendar = Calendar.getInstance()
         val timeOfDay: Int = c.get(Calendar.HOUR_OF_DAY)
         if (timeOfDay in 0..11) {
-           return "Good Morning"
+            return "Good Morning"
         } else if (timeOfDay in 12..15) {
             return "Good Afternoon"
         } else if (timeOfDay in 16..20) {
@@ -38,4 +28,11 @@ class HomeViewModel : BaseViewModel() {
         }
         return ""
     }
+
+    fun logoutUser(onLogout: (logoutState: HomeScreenState) -> Unit) {
+        sharedViewModel.stateProvider.logoutUser(){
+            onLogout(it)
+        }
+    }
+
 }

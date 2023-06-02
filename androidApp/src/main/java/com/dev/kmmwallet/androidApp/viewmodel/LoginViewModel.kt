@@ -1,17 +1,20 @@
 package com.dev.kmmwallet.androidApp.viewmodel
 
 import com.dev.kmmwallet.shared.datasource.webservice.model.request.User
-import com.dev.kmmwallet.shared.viewmodel.event.LoginScreenState
-import com.dev.kmmwallet.shared.viewmodel.event.userLogin
-import com.dev.kmmwallet.shared.viewmodel.launchCoroutine
+import com.dev.kmmwallet.shared.viewmodel.event.getUserAuthState
+import com.dev.kmmwallet.shared.viewmodel.status.ScreenState
 
-class LoginViewModel : BaseViewModel(){
+class LoginViewModel : BaseViewModel() {
 
-    fun authenticateUser(userName : String, pass : String, updateUi : (loginState : LoginScreenState) -> Unit) {
-        launchCoroutine {
-            sharedViewModel.events.userLogin(User(userName,pass),fun(loginState) {
+    fun authenticateUser(
+        userName: String,
+        pass: String,
+        updateUi: (loginState: ScreenState) -> Unit
+    ) {
+        sharedViewModel.stateProvider.getUserAuthState(
+            User(userName, pass),
+            fun(loginState: ScreenState) {
                 updateUi(loginState)
             })
-        }
     }
 }

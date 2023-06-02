@@ -12,11 +12,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            addLandingPageFragment(LandingPage(), getString(R.string.tag_landing_page))
+            addLandingPageFragment(LandingPage())
         }
     }
 
-    fun addLandingPageFragment(fragment: Fragment, tag: String) {
+    fun addLandingPageFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.main_view, fragment).commit()
     }
 
@@ -35,5 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
     }
 }
